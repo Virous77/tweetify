@@ -1,0 +1,145 @@
+.homeBar {
+  padding-top: 0;
+  position: relative;
+}
+
+.homeHead {
+  background-color: rgba(0, 0, 0, 0.4);
+  position: sticky;
+  width: 100%;
+  left: 0;
+  right: 0;
+  padding: 1rem;
+}
+
+.homeTweetBox {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: 70px 1fr;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.homeUserProfile {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100px;
+}
+
+.line {
+  width: 100%;
+  height: 1px;
+  background-color: gray;
+}
+
+.tweetWrite textarea {
+  background-color: transparent;
+  padding-top: 2rem;
+  font-size: 1.1rem;
+  width: 100%;
+  outline: none;
+  border: none;
+  color: white;
+  padding-left: 0;
+  font-family: inherit;
+  padding-bottom: 0;
+  max-width: 100%;
+  min-width: 100%;
+  resize: none;
+}
+
+textarea::-webkit-scrollbar {
+  width: 0;
+  display: none;
+}
+
+.homeReply {
+  margin-top: 0.6rem;
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  gap: 0.5rem;
+  cursor: pointer;
+  width: fit-content;
+}
+
+.addMore {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 0.7rem;
+}
+
+.rightAdd,
+.leftAdd {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.addIcon {
+  font-size: 1.3rem;
+  cursor: pointer;
+}
+
+.addIcon:hover {
+  opacity: 0.7;
+}
+
+.leftAdd button {
+  background-color: rgb(87, 132, 247);
+  border-radius: 20px;
+  font-size: 1rem;
+  padding: 8px 18px;
+}
+
+.leftAdd button:disabled {
+  opacity: 0.6;
+  cursor: default;
+}
+
+.leftAdd {
+  font-size: 0.8rem;
+}
+
+.previewImage {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+.previewImage img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.livePreview {
+  position: relative;
+}
+
+.previewImage p {
+  position: absolute;
+  top: 3%;
+  left: 3%;
+  width: 2rem;
+  height: 2rem;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  cursor: pointer;
+}
+
+.maxError {
+  position: fixed;
+  background-color: rgb(87, 132, 247);
+  font-size: 0.9rem;
+  padding: 5px 12px;
+  border-radius: 3px;
+  bottom: 3%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

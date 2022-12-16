@@ -1,0 +1,8 @@
+.registerBar {
+  background-color: black;
+  width: 600px;
+  padding: 2rem;
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 60px 1fr;
+}

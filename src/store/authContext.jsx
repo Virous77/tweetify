@@ -35,7 +35,6 @@ export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(getLocalStorage());
   const { email, password, firstName, lastName, confirmPassword } = user;
   const [loading, setLoading] = useState(false);
-  const [googleLoading, setGoogleLoading] = useState(false);
   const [activeUser, setActiveUser] = useState("");
   const [news, setNews] = useState("");
   const navigate = useNavigate();
@@ -139,8 +138,6 @@ export const AuthContextProvider = ({ children }) => {
   };
 
   const googleLogin = async () => {
-    setGoogleLoading(true);
-
     const provider = new GoogleAuthProvider();
     try {
       const { user: users } = await signInWithPopup(auth, provider);
@@ -165,12 +162,10 @@ export const AuthContextProvider = ({ children }) => {
       if (!unique) {
         await addDoc(collection(db, "users"), userData);
       }
-      setGoogleLoading(false);
       setUser(tempdata);
       navigate("/");
     } catch (error) {
       toast.error(error.message);
-      setGoogleLoading(false);
     }
   };
 
@@ -186,7 +181,6 @@ export const AuthContextProvider = ({ children }) => {
         logout,
         activeUser,
         googleLogin,
-        googleLoading,
       }}
     >
       {children}

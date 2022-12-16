@@ -2,7 +2,7 @@ import React from "react";
 import "./Auth.css";
 
 const Login = () => {
-  return <div>Login</div>;
+  return <section>Login</section>;
 };
 
 export default Login;
