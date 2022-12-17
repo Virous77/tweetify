@@ -1,5 +1,5 @@
 import React from "react";
-import { BsGoogle } from "react-icons/Bs";
+import { BsGoogle } from "react-icons/bs";
 import { useAuthContext } from "../../store/authContext";
 import { useAction } from "../../store/actionContext";
 
@@ -19,9 +19,7 @@ const LogoutSidebar = () => {
           <BsGoogle />
           Sign up with Google
         </button>
-        <button onClick={() => setShowLogin(true)}>
-          Sign up with phone or email
-        </button>
+        <button onClick={() => setShowLogin(true)}>Sign up with email</button>
       </div>
     </div>
   );

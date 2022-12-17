@@ -63,3 +63,12 @@ for (let i = 1965; i <= 2000; i++) {
 for (let i = 2001; i <= 2023; i++) {
   year.push(i);
 }
+
+export function convertTimestamp(timestamp) {
+  let date = timestamp?.toDate();
+  let mm = months[date?.getMonth()];
+  let yyyy = date?.getFullYear();
+
+  date = mm + " " + yyyy;
+  return date;
+}

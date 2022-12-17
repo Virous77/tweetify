@@ -1,0 +1,205 @@
+.profileHead {
+  padding: 1rem;
+  position: sticky;
+  z-index: 100;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  top: 0;
+}
+
+.profileHeadUser h3 {
+  text-transform: capitalize;
+}
+
+.profileHeadUser span {
+  font-size: 0.7rem;
+  font-weight: 600;
+  opacity: 0.7;
+}
+
+.noCover {
+  background-color: white;
+}
+
+.noCover img {
+  width: 100%;
+  height: 180px;
+  object-fit: contain;
+}
+
+.userBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+
+.activeUserNoImg {
+  margin-top: -5rem;
+}
+
+.activeUserNoImg img {
+  width: 170px;
+  height: 170px;
+  border-radius: 100px;
+  border: 4px solid black;
+}
+
+.editButton {
+  background-color: black;
+  border-radius: 20px;
+  border: 2px solid gray;
+  padding: 8px 17px;
+}
+
+.userInfoBox {
+  padding: 1rem;
+}
+
+.userInfoBox h3 {
+  text-transform: capitalize;
+  font-size: 1.3rem;
+}
+
+.userInfoBox span {
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.userPInfo {
+  margin-top: 1.3rem;
+}
+
+.wrapUserInfo {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin-top: 0.7rem;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.link a {
+  color: blue;
+}
+
+.link a:hover {
+  text-decoration: underline;
+}
+
+.born {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  opacity: 0.7;
+}
+
+.born p {
+  font-size: 0.9rem;
+}
+
+.joined {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  margin-top: 0.2rem;
+  font-size: 0.9rem;
+}
+
+.userFollower {
+  margin-top: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.userFollower p {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+  cursor: pointer;
+}
+
+.userFollower p:hover {
+  text-decoration: underline;
+}
+
+/* //////////////////////////////////Edit profile////////////////////////// */
+
+.editProfile {
+  background-color: black;
+  z-index: 1000;
+  border-radius: 10px;
+  padding: 1rem;
+  width: 700px;
+  padding-top: 0;
+}
+
+.editProfileTop {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.8);
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+}
+
+.leftEdit {
+  display: flex;
+  align-items: center;
+  gap: 3rem;
+}
+
+.rightEdit {
+  background-color: white;
+  border-radius: 20px;
+  color: black;
+  font-size: 0.95rem;
+  padding: 10px 17px;
+}
+
+.editCover {
+  position: relative;
+}
+
+.imageOverLay {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+  z-index: 2;
+}
+
+.coverAction {
+  position: absolute;
+  z-index: 3;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.coverAction label,
+.removeCover {
+  width: 3rem;
+  height: 3rem;
+  border-radius: 100px;
+  background-color: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

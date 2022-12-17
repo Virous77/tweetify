@@ -13,51 +13,56 @@ import { serverTimestamp, collection, addDoc } from "firebase/firestore";
 import { useEffect } from "react";
 import useFetchCollection from "../hooks/useFetchCollection";
 import { db, auth } from "../firebase/firebase.config";
+import { useAction } from "./actionContext";
 
 const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const getLocalStorage = () => {
-    const data = localStorage.getItem("tweet");
-    const result = data ? JSON.parse(data) : initialState;
-    return result;
-  };
-
-  const initialState = {
+  const initialState1 = {
     email: "",
     password: "",
-    firstName: "",
-    lastName: "",
-    confirmPassword: "",
+    name: "",
+    uniqueId: "",
+    monthInfo: "",
+    dayInfo: "",
+    yearInfo: "",
     isLoggedIn: false,
   };
 
+  const getLocalStorage = () => {
+    const data = localStorage.getItem("tweet");
+    const result = data ? JSON.parse(data) : initialState1;
+    return result;
+  };
+
+  ///////State////////////////////////////
+  const initialState = {
+    month: false,
+    day: false,
+    years: false,
+  };
+  const [showInfo, setShowInfo] = useState(initialState);
+  const [focus, setFocus] = useState("");
   const [user, setUser] = useState(getLocalStorage());
-  const { email, password, firstName, lastName, confirmPassword } = user;
+  const { email, password, name, uniqueId, monthInfo, dayInfo, yearInfo } =
+    user;
   const [loading, setLoading] = useState(false);
   const [activeUser, setActiveUser] = useState("");
   const [news, setNews] = useState("");
+  //////////////////////////////////////////////
+  const { setShowLogin, setShowRealLogin } = useAction();
   const navigate = useNavigate();
-
   const { data, getCollection } = useFetchCollection("users");
 
-  useEffect(() => {
-    getCollection();
-  }, [news]);
-
+  /////Onchange
   const handleChange = (e) => {
     const { name, value } = e.target;
     setUser({ ...user, [name]: value });
   };
 
+  ///New user by Email
   const submitUser = async () => {
-    if (password !== confirmPassword) {
-      setLoading(false);
-      toast.error("Password must be same");
-      return;
-    }
-
-    if (!email || !password || !confirmPassword || !firstName || !lastName) {
+    if (!email || !password || !name || !monthInfo || !dayInfo || !yearInfo) {
       setLoading(false);
       toast.error("All fields must be filled..");
       return;
@@ -70,15 +75,17 @@ export const AuthContextProvider = ({ children }) => {
         email,
         password
       );
+
       setLoading(false);
       const tempdata = {
         isLoggedIn: true,
       };
 
       const userData = {
-        firstName: firstName,
-        lastName: lastName,
-        email: email,
+        name,
+        uniqueId,
+        dob: monthInfo + " " + dayInfo + " " + yearInfo,
+        email,
         uid: users.uid,
         photoURL: users.photoURL || null,
         createdAt: serverTimestamp(),
@@ -88,6 +95,7 @@ export const AuthContextProvider = ({ children }) => {
       await addDoc(collection(db, "users"), userData);
       setUser(tempdata);
       navigate("/");
+      setShowLogin(false);
     } catch (error) {
       setLoading(false);
       toast.error("Something went wrong, Try again!");
@@ -111,6 +119,7 @@ export const AuthContextProvider = ({ children }) => {
       };
       localStorage.setItem("tweet", JSON.stringify(tempdata));
       navigate("/");
+      setShowRealLogin(false);
       setUser(tempdata);
     } catch (error) {
       setLoading(false);
@@ -118,6 +127,7 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  ///ActivetUser data
   const getCurrentUser = () => {
     setLoading(true);
     onAuthStateChanged(auth, (user) => {
@@ -130,6 +140,7 @@ export const AuthContextProvider = ({ children }) => {
     });
   };
 
+  //////Logout
   const logout = async () => {
     await signOut(auth);
     navigate("/");
@@ -137,6 +148,7 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.removeItem("tweet");
   };
 
+  ////GoogleLogin
   const googleLogin = async () => {
     const provider = new GoogleAuthProvider();
     try {
@@ -146,8 +158,9 @@ export const AuthContextProvider = ({ children }) => {
       const unique = data.find((ids) => ids.uid === users.uid);
 
       const userData = {
-        firstName: users.displayName,
-        lastName: null,
+        name: users.displayName,
+        uniqueId: users.email.slice(0, 5),
+        dob: null,
         email: users.email,
         uid: users.uid,
         photoURL: users.photoURL || null,
@@ -163,11 +176,17 @@ export const AuthContextProvider = ({ children }) => {
         await addDoc(collection(db, "users"), userData);
       }
       setUser(tempdata);
+      setShowLogin(false);
+      setShowRealLogin(false);
       navigate("/");
     } catch (error) {
       toast.error(error.message);
     }
   };
+
+  useEffect(() => {
+    getCollection();
+  }, [news]);
 
   return (
     <AuthContext.Provider
@@ -181,6 +200,12 @@ export const AuthContextProvider = ({ children }) => {
         logout,
         activeUser,
         googleLogin,
+        showInfo,
+        setShowInfo,
+        initialState,
+        setUser,
+        focus,
+        setFocus,
       }}
     >
       {children}

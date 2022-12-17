@@ -9,13 +9,13 @@ import { ActionContextProvider } from "./store/actionContext";
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <BrowserRouter>
-      <AuthContextProvider>
-        <TweetContextProvider>
-          <ActionContextProvider>
+      <ActionContextProvider>
+        <AuthContextProvider>
+          <TweetContextProvider>
             <App />
-          </ActionContextProvider>
-        </TweetContextProvider>
-      </AuthContextProvider>
+          </TweetContextProvider>
+        </AuthContextProvider>
+      </ActionContextProvider>
     </BrowserRouter>
   </React.StrictMode>
 );

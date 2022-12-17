@@ -1,11 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Layout.css";
 import logo from "../../assets/icons/one.svg";
 import { menulinks } from "../../utils/data";
 import { Link } from "react-router-dom";
 import { BsTwitter, BsThreeDots } from "react-icons/bs";
+import { useAuthContext } from "../../store/authContext";
 
 const Menubar = () => {
+  const { getCurrentUser } = useAuthContext();
+
+  useEffect(() => {
+    getCurrentUser();
+  }, []);
+
   return (
     <aside className="menuBar">
       <div className="menuLogo">
