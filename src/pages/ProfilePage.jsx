@@ -5,14 +5,14 @@ import useFetchUser from "../hooks/useFetchUser";
 import { useAuthContext } from "../store/authContext";
 import { useNavigate } from "react-router-dom";
 import UserProfile from "../components/profile/UserProfile";
-import { useAction } from "../store/actionContext";
 import EditProfile from "../components/profile/EditProfile";
+import { useProfile } from "../store/profileContext";
 
 const ProfilePage = () => {
   const { activeUser } = useAuthContext();
   const { data, loading } = useFetchUser(activeUser?.uid, "users");
   const navigate = useNavigate();
-  const { editProfle, setEditProfile } = useAction();
+  const { editProfle, setEditProfile } = useProfile();
 
   if (loading) return <p>Loading...</p>;
 
@@ -30,9 +30,17 @@ const ProfilePage = () => {
           <span>100 Tweets</span>
         </div>
       </div>
-      <UserProfile data={data} setEditProfile={setEditProfile} />
+      <UserProfile
+        data={data}
+        setEditProfile={setEditProfile}
+        uid={activeUser.uid}
+      />
       {editProfle && (
-        <EditProfile setEditProfile={setEditProfile} editProfile={editProfle} />
+        <EditProfile
+          setEditProfile={setEditProfile}
+          editProfile={editProfle}
+          data={data}
+        />
       )}
     </section>
   );

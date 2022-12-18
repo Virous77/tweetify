@@ -20,14 +20,10 @@
   opacity: 0.7;
 }
 
-.noCover {
-  background-color: white;
-}
-
-.noCover img {
+.coverImage img {
   width: 100%;
   height: 180px;
-  object-fit: contain;
+  object-fit: cover;
 }
 
 .userBar {
@@ -74,10 +70,12 @@
 }
 
 .wrapUserInfo {
-  display: flex;
+  display: grid;
+  width: 85%;
   align-items: center;
-  gap: 2rem;
+  grid-template-columns: repeat(2, 1fr);
   margin-top: 0.7rem;
+  gap: 0.3rem;
 }
 
 .link {
@@ -88,6 +86,7 @@
 
 .link a {
   color: blue;
+  white-space: nowrap;
 }
 
 .link a:hover {
@@ -111,6 +110,7 @@
   gap: 0.3rem;
   margin-top: 0.2rem;
   font-size: 0.9rem;
+  text-transform: capitalize;
 }
 
 .userFollower {
@@ -131,15 +131,20 @@
   text-decoration: underline;
 }
 
+.noCover {
+  background-color: white;
+}
+
 /* //////////////////////////////////Edit profile////////////////////////// */
 
 .editProfile {
   background-color: black;
   z-index: 1000;
   border-radius: 10px;
-  padding: 1rem;
   width: 700px;
   padding-top: 0;
+  height: 600px;
+  overflow-y: scroll;
 }
 
 .editProfileTop {
@@ -147,11 +152,11 @@
   top: 0;
   width: 100%;
   background-color: rgba(0, 0, 0, 0.8);
-  padding: 1rem 0;
+  padding: 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  z-index: 10;
+  z-index: 16;
 }
 
 .leftEdit {
@@ -166,6 +171,11 @@
   color: black;
   font-size: 0.95rem;
   padding: 10px 17px;
+}
+
+.profileAction {
+  padding: 0 1rem;
+  margin-top: -4rem;
 }
 
 .editCover {
@@ -194,12 +204,127 @@
 }
 
 .coverAction label,
-.removeCover {
+.removeCover,
+.pCoverAction label {
   width: 3rem;
   height: 3rem;
   border-radius: 100px;
-  background-color: rgba(0, 0, 0, 0.8);
+  background-color: rgba(0, 0, 0, 0.6);
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.editUserImage img {
+  width: 120px;
+  height: 120px;
+  border-radius: 100px;
+  border: 4px solid black;
+}
+
+.editUserImage {
+  position: relative;
+  z-index: 10;
+}
+
+.pImageOverLay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  z-index: 11;
+  top: 0;
+  left: 0;
+  width: 120px;
+  height: 120px;
+  border-radius: 100px;
+}
+
+.pCoverAction {
+  position: absolute;
+  z-index: 12;
+  top: 50%;
+  left: 15%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  width: 120px;
+  height: 120px;
+}
+
+.editProfileForm {
+  padding: 1rem;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.editBirthDate {
+  padding: 1rem;
+  margin-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.editBirthAction {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.editBirthAction p {
+  opacity: 0.7;
+  font-size: 0.9rem;
+}
+
+.editBirthAction span {
+  font-size: 0.9rem;
+  color: blue;
+  cursor: pointer;
+}
+
+.editBirthDate h3 {
+  font-size: 1.1rem;
+  margin-top: 0.4rem;
+}
+
+.editDisplay {
+  padding: 0 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+  padding-bottom: 3rem;
+}
+
+.privateBirth {
+  width: 1.5rem;
+  height: 1.5rem;
+  background-color: gray;
+  display: inline-block;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.publicBirth {
+  width: 1.5rem;
+  height: 1.5rem;
+  display: inline-block;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: blue;
+  color: white;
+  border-radius: 2px;
+}
+
+.displayBirthdate {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.editBirth {
+  padding: 1rem;
+  margin-top: -2rem;
+  margin-bottom: 1rem;
 }

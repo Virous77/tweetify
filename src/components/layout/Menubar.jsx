@@ -5,9 +5,13 @@ import { menulinks } from "../../utils/data";
 import { Link } from "react-router-dom";
 import { BsTwitter, BsThreeDots } from "react-icons/bs";
 import { useAuthContext } from "../../store/authContext";
+import useFetchUser from "../../hooks/useFetchUser";
+import { useAction } from "../../store/actionContext";
 
 const Menubar = () => {
-  const { getCurrentUser } = useAuthContext();
+  const { getCurrentUser, activeUser, logout } = useAuthContext();
+  const { data } = useFetchUser(activeUser?.uid, "users");
+  const { showLogout, setShowLogout } = useAction();
 
   useEffect(() => {
     getCurrentUser();
@@ -34,14 +38,32 @@ const Menubar = () => {
 
       <button className="tweetButton">Tweet</button>
 
-      <div className="menuActiveUser">
-        <img src={logo} alt="" />
+      <div
+        className="menuActiveUser"
+        onClick={() => setShowLogout(!showLogout)}
+      >
+        <img src={data[0]?.photoURL || logo} alt="" />
         <div className="menuUserInfo">
-          <h5>Reetesh VirousB (...</h5>
-          <span>@iMBitcoinB</span>
+          <h5>
+            {data[0]?.name?.slice(0, 15)}{" "}
+            {data[0]?.name?.length > 15 ? "(..." : ""}
+          </h5>
+          <span>@{data[0]?.uniqueId}</span>
         </div>
         <BsThreeDots className="menuDot" />
       </div>
+
+      {showLogout && (
+        <div
+          className="menuLogout"
+          onClick={() => {
+            logout();
+            setShowLogout(false);
+          }}
+        >
+          <p>Log out @{data[0]?.uniqueId}</p>
+        </div>
+      )}
     </aside>
   );
 };

@@ -68,7 +68,7 @@
 
 .menuActiveUser {
   position: absolute;
-  bottom: 0;
+  bottom: 2%;
   left: 0;
   width: 100%;
   z-index: 2;
@@ -76,6 +76,11 @@
   align-items: flex-start;
   gap: 1rem;
   padding: 1rem;
+  cursor: pointer;
+}
+
+.menuActiveUser:hover {
+  opacity: 0.8;
 }
 
 .menuActiveUser img {
@@ -86,6 +91,8 @@
 
 .menuUserInfo h5 {
   font-size: 1rem;
+  text-transform: capitalize;
+  white-space: nowrap;
 }
 
 .menuActiveUser span {
@@ -97,6 +104,18 @@
   cursor: pointer;
   font-size: 1.1rem;
   margin-left: 1rem;
+}
+
+.menuLogout {
+  position: absolute;
+  bottom: 12%;
+  left: 10%;
+  background-color: black;
+  box-shadow: 1px 1px 12px rgba(82, 82, 82, 0.5);
+  z-index: 10;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
 }
 
 /* ///////////////sideBar/////////////// */

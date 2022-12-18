@@ -24,7 +24,9 @@ const useFetchUser = (userId, collections) => {
   };
 
   useEffect(() => {
-    getCollection();
+    if (userId) {
+      getCollection();
+    }
   }, [userId]);
 
   return {

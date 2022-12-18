@@ -84,11 +84,18 @@ export const AuthContextProvider = ({ children }) => {
       const userData = {
         name,
         uniqueId,
-        dob: monthInfo + " " + dayInfo + " " + yearInfo,
+        dob: {
+          DoB: monthInfo + " " + dayInfo + " " + yearInfo,
+          month: monthInfo,
+          date: dayInfo,
+          year: yearInfo,
+        },
         email,
         uid: users.uid,
         photoURL: users.photoURL || null,
         createdAt: serverTimestamp(),
+        birthType: "public",
+        locationType: "public",
       };
 
       localStorage.setItem("tweet", JSON.stringify(tempdata));
@@ -160,10 +167,17 @@ export const AuthContextProvider = ({ children }) => {
       const userData = {
         name: users.displayName,
         uniqueId: users.email.slice(0, 5),
-        dob: null,
+        dob: {
+          DoB: null,
+          month: "",
+          date: "",
+          year: "",
+        },
         email: users.email,
         uid: users.uid,
         photoURL: users.photoURL || null,
+        birthType: "public",
+        locationType: "public",
         createdAt: serverTimestamp(),
       };
 

@@ -9,7 +9,8 @@ export const ActionContextProvider = ({ children }) => {
   const [nextLogin, setNextLogin] = useState("");
 
   //Profile State
-  const [editProfle, setEditProfile] = useState("");
+  const [showLogout, setShowLogout] = useState(false);
+  const [showFullImage, setShowFullImage] = useState("");
 
   return (
     <ActionContext.Provider
@@ -20,8 +21,10 @@ export const ActionContextProvider = ({ children }) => {
         setShowRealLogin,
         nextLogin,
         setNextLogin,
-        editProfle,
-        setEditProfile,
+        showLogout,
+        setShowLogout,
+        showFullImage,
+        setShowFullImage,
       }}
     >
       {children}
