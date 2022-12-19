@@ -7,15 +7,18 @@ import { BsTwitter, BsThreeDots } from "react-icons/bs";
 import { useAuthContext } from "../../store/authContext";
 import useFetchUser from "../../hooks/useFetchUser";
 import { useAction } from "../../store/actionContext";
+import { useTweet } from "../../store/tweetContext";
 
 const Menubar = () => {
   const { getCurrentUser, activeUser, logout } = useAuthContext();
   const { data } = useFetchUser(activeUser?.uid, "users");
-  const { showLogout, setShowLogout } = useAction();
+  const { showLogout, setShowLogout, setUserActive } = useAction();
+  const { setImage, setShowTweetType } = useTweet();
 
   useEffect(() => {
     getCurrentUser();
-  }, []);
+    setUserActive(data[0]);
+  }, [data]);
 
   return (
     <aside className="menuBar">
@@ -36,7 +39,17 @@ const Menubar = () => {
         ))}
       </div>
 
-      <button className="tweetButton">Tweet</button>
+      <Link to="/tweet">
+        <button
+          className="tweetButton"
+          onClick={() => {
+            setImage([]);
+            setShowTweetType(false);
+          }}
+        >
+          Tweet
+        </button>
+      </Link>
 
       <div
         className="menuActiveUser"

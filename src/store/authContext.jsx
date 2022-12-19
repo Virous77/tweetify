@@ -95,6 +95,7 @@ export const AuthContextProvider = ({ children }) => {
         photoURL: users.photoURL || null,
         createdAt: serverTimestamp(),
         birthType: "public",
+        tweet: [],
         locationType: "public",
       };
 
@@ -178,6 +179,7 @@ export const AuthContextProvider = ({ children }) => {
         photoURL: users.photoURL || null,
         birthType: "public",
         locationType: "public",
+        tweet: [],
         createdAt: serverTimestamp(),
       };
 

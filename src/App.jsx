@@ -9,6 +9,7 @@ import {
   ProfilePage,
   BookmarksPage,
   MessagePage,
+  TweetPage,
 } from "./pages/index";
 import "./index.css";
 import { Register, Login } from "./components/auth/index";
@@ -30,6 +31,7 @@ const App = () => {
           <Route path="/bookmarks" element={<BookmarksPage />} />
           <Route path="/profile" element={<ProfilePage />} />
           <Route path="/explore" element={<ExplorePage />} />
+          <Route path="/tweet" element={<TweetPage />} />
         </Routes>
       </div>
       <Sidebar />

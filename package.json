@@ -9,11 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@originjs/vite-plugin-commonjs": "^1.0.3",
     "firebase": "^9.15.0",
     "framer-motion": "^7.10.0",
+    "moment": "^2.29.4",
+    "moment-timezone": "^0.5.40",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.7.1",
+    "react-moment": "^1.1.2",
     "react-router-dom": "^6.4.5",
     "react-toastify": "^9.1.1"
   },

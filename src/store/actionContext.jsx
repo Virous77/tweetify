@@ -11,6 +11,10 @@ export const ActionContextProvider = ({ children }) => {
   //Profile State
   const [showLogout, setShowLogout] = useState(false);
   const [showFullImage, setShowFullImage] = useState("");
+  const [userActive, setUserActive] = useState("");
+
+  //LiveTweet
+  const [showLiveActionBox, setShowLiveActionBox] = useState("");
 
   return (
     <ActionContext.Provider
@@ -25,6 +29,10 @@ export const ActionContextProvider = ({ children }) => {
         setShowLogout,
         showFullImage,
         setShowFullImage,
+        userActive,
+        setUserActive,
+        setShowLiveActionBox,
+        showLiveActionBox,
       }}
     >
       {children}

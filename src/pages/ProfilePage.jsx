@@ -27,7 +27,10 @@ const ProfilePage = () => {
 
         <div className="profileHeadUser">
           <h3>{data[0]?.name}</h3>
-          <span>100 Tweets</span>
+          <span>
+            {data[0]?.tweet?.length}{" "}
+            {data[0]?.tweet?.length > 0 ? " Tweets" : " Tweet"}{" "}
+          </span>
         </div>
       </div>
       <UserProfile

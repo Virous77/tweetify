@@ -4,12 +4,13 @@
 }
 
 .homeHead {
-  background-color: rgba(0, 0, 0, 0.4);
+  background-color: rgba(0, 0, 0, 0.85);
   position: sticky;
   width: 100%;
   left: 0;
   right: 0;
   padding: 1rem;
+  top: 0;
 }
 
 .homeTweetBox {
@@ -18,6 +19,13 @@
   grid-template-columns: 70px 1fr;
   gap: 1rem;
   align-items: flex-start;
+}
+
+.homeTweetUser img {
+  border-radius: 100%;
+  height: 3rem;
+  width: 3rem;
+  margin-top: 1rem;
 }
 
 .homeUserProfile {
@@ -142,4 +150,5 @@ textarea::-webkit-scrollbar {
   bottom: 3%;
   left: 50%;
   transform: translate(-50%, -50%);
+  z-index: 1200;
 }

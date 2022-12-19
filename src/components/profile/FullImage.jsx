@@ -4,7 +4,10 @@ import { AiOutlineClose } from "react-icons/ai";
 const FullImage = ({ setShowFullImage, showFullImage }) => {
   return (
     <>
-      <div className="overLay" onClick={() => setShowFullImage("")}></div>
+      <div
+        className="overLay fullOverLay"
+        onClick={() => setShowFullImage("")}
+      ></div>
       <section className="fullImage">
         <header className="fullImageTop">
           <AiOutlineClose
@@ -16,7 +19,9 @@ const FullImage = ({ setShowFullImage, showFullImage }) => {
 
         <div
           className={
-            showFullImage.title === "profile" ? "fullProfile" : "fullCover"
+            showFullImage.title === "profile"
+              ? "fixedIt  fullProfile"
+              : "fixedIt fullCover"
           }
         >
           <img src={showFullImage.image} alt="" />
