@@ -76,7 +76,7 @@ export const ProfileContextProvider = ({ children }) => {
         cover: coverImage || cover,
         link: link,
         dob: {
-          DoB: monthInfo + " " + dayInfo + " " + yearInfo,
+          DoB: monthInfo + " " + dayInfo + ", " + yearInfo,
           month: monthInfo,
           date: dayInfo,
           year: yearInfo,

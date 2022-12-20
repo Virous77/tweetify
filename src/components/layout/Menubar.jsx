@@ -8,17 +8,26 @@ import { useAuthContext } from "../../store/authContext";
 import useFetchUser from "../../hooks/useFetchUser";
 import { useAction } from "../../store/actionContext";
 import { useTweet } from "../../store/tweetContext";
+import useFetchCollectionbyParam from "../../hooks/useFetchCollectionByParam";
 
 const Menubar = () => {
   const { getCurrentUser, activeUser, logout } = useAuthContext();
   const { data } = useFetchUser(activeUser?.uid, "users");
-  const { showLogout, setShowLogout, setUserActive } = useAction();
+  const { showLogout, setShowLogout, setUserActive, setGetBookMark } =
+    useAction();
   const { setImage, setShowTweetType } = useTweet();
+
+  const { data: bookMarkData } = useFetchCollectionbyParam(
+    "userId",
+    activeUser?.uid,
+    "bookmark"
+  );
 
   useEffect(() => {
     getCurrentUser();
     setUserActive(data[0]);
-  }, [data]);
+    setGetBookMark(bookMarkData);
+  }, [data, bookMarkData]);
 
   return (
     <aside className="menuBar">
@@ -55,7 +64,11 @@ const Menubar = () => {
         className="menuActiveUser"
         onClick={() => setShowLogout(!showLogout)}
       >
-        <img src={data[0]?.photoURL || logo} alt="" />
+        <img
+          src={data[0]?.photoURL || logo}
+          alt=""
+          referrerPolicy="no-referrer"
+        />
         <div className="menuUserInfo">
           <h5>
             {data[0]?.name?.slice(0, 15)}{" "}

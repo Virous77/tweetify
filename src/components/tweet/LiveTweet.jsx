@@ -6,15 +6,29 @@ import LiveTweetAction from "./LiveTweetAction";
 import { BsThreeDots } from "react-icons/bs";
 import { useAction } from "../../store/actionContext";
 import LiveTweetActionBox from "./LiveTweetActionBox";
+import EditTweetType from "./EditTweetType";
 
 const LiveTweet = () => {
   const { data, loading } = useFetchCollection("tweet");
-  const { setShowLiveActionBox, showLiveActionBox } = useAction();
+  const {
+    setShowLiveActionBox,
+    showLiveActionBox,
+    setShareTweet,
+    showChangeType,
+    setShowChangeType,
+  } = useAction();
 
   if (loading) return <p>Loading..</p>;
 
   return (
-    <section className="liveTweetBar" onClick={() => setShowLiveActionBox("")}>
+    <section
+      className="liveTweetBar"
+      onClick={() => {
+        setShowLiveActionBox("");
+        setShareTweet("");
+        setShowChangeType("");
+      }}
+    >
       <div className="line"></div>
 
       <main className="liveTweetListBar">
@@ -57,6 +71,7 @@ const LiveTweet = () => {
                         <img
                           src={i}
                           alt=""
+                          referrerPolicy="no-referrer"
                           className={`${
                             post?.image?.length >= 3
                               ? "liveTweetImageF"
@@ -105,13 +120,18 @@ const LiveTweet = () => {
                   </div>
                 )}
 
-                <LiveTweetAction post={post} />
+                <LiveTweetAction post={post} idx={idx} />
 
                 {showLiveActionBox && showLiveActionBox.count === idx && (
                   <LiveTweetActionBox
                     showLiveActionBox={showLiveActionBox}
                     setShowLiveActionBox={setShowLiveActionBox}
+                    idx={idx}
                   />
+                )}
+
+                {showChangeType && showChangeType.count === idx && (
+                  <EditTweetType />
                 )}
               </div>
             </div>

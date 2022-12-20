@@ -36,8 +36,6 @@ const Tweet = () => {
 
   const path = window.location.pathname;
 
-  console.log(showTweetType);
-
   return (
     <>
       {path === "/tweet" && (
@@ -72,7 +70,11 @@ const Tweet = () => {
         )}
 
         <div className="homeTweetUser">
-          <img src={userActive?.photoURL || noImg} alt="" />
+          <img
+            src={userActive?.photoURL || noImg}
+            alt=""
+            referrerPolicy="no-referrer"
+          />
         </div>
         <section className="tweetBox">
           <div className="tweetWrite">
@@ -89,7 +91,7 @@ const Tweet = () => {
               <div className="previewImage">
                 {image?.map((li, idx) => (
                   <div className="livePreview" key={idx}>
-                    <img src={li} alt="" />
+                    <img src={li} alt="" referrerPolicy="no-referrer" />
                     <p
                       onClick={() => {
                         if (!isLoading) {

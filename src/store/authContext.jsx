@@ -85,7 +85,7 @@ export const AuthContextProvider = ({ children }) => {
         name,
         uniqueId,
         dob: {
-          DoB: monthInfo + " " + dayInfo + " " + yearInfo,
+          DoB: monthInfo + " " + dayInfo + ", " + yearInfo,
           month: monthInfo,
           date: dayInfo,
           year: yearInfo,
@@ -97,6 +97,7 @@ export const AuthContextProvider = ({ children }) => {
         birthType: "public",
         tweet: [],
         locationType: "public",
+        PinPost: {},
       };
 
       localStorage.setItem("tweet", JSON.stringify(tempdata));
@@ -181,6 +182,7 @@ export const AuthContextProvider = ({ children }) => {
         locationType: "public",
         tweet: [],
         createdAt: serverTimestamp(),
+        PinPost: {},
       };
 
       const tempdata = {

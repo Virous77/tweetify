@@ -18,7 +18,7 @@ import { LogoutFooter } from "./components/layout/index";
 import { useAuthContext } from "./store/authContext";
 
 const App = () => {
-  const { showLogin, showRealLogin } = useAction();
+  const { showLogin, showRealLogin, showNotification } = useAction();
   const { user } = useAuthContext();
 
   return (
@@ -38,6 +38,7 @@ const App = () => {
       {showLogin && <Register />}
       {showRealLogin && <Login />}
       {!user.isLoggedIn && <LogoutFooter />}
+      {showNotification && <p className="notification">{showNotification}</p>}
       <ToastContainer />
     </section>
   );

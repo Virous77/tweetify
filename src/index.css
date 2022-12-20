@@ -109,3 +109,16 @@ html {
 .fullOverLay {
   background-color: rgba(255, 255, 255, 0.5);
 }
+
+.notification {
+  position: fixed;
+  bottom: 4%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 100000000;
+  background-color: blue;
+  padding: 10px;
+  border-radius: 3px;
+  font-size: 1rem;
+  color: white;
+}
