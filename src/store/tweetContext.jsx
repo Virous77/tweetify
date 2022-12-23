@@ -27,6 +27,8 @@ export const TweetContextProvider = ({ children }) => {
 
   ///Change Tweet Type
   const [getData, setGetDta] = useState("");
+  const [commentMessage, setCommentMessage] = useState("");
+  const [retweet, setRetweet] = useState("");
 
   const {
     userActive,
@@ -34,6 +36,8 @@ export const TweetContextProvider = ({ children }) => {
     Notification,
     setShareTweet,
     getBookmark,
+    showComment,
+    setShowComment,
   } = useAction();
   const { uploadImage, tweetImage, isLoading, setTweetImage, deleteImage } =
     useUploadMultipleImage();
@@ -67,9 +71,6 @@ export const TweetContextProvider = ({ children }) => {
   //Create new Tweet
   const submitPost = async () => {
     setLoading(true);
-
-    const profileRef = doc(db, "users", userActive.id);
-
     const tempData = {
       createdAt: new Date(),
       tweetUserId: userActive.uid,
@@ -85,9 +86,6 @@ export const TweetContextProvider = ({ children }) => {
     };
 
     try {
-      await updateDoc(profileRef, {
-        tweet: arrayUnion(tempData),
-      });
       await addDoc(collection(db, "tweet"), tempData);
       setLoading(false);
       setImage([]);
@@ -102,44 +100,18 @@ export const TweetContextProvider = ({ children }) => {
   ///DeleteTweet
   const deletTweet = async (e) => {
     setShowLiveActionBox(false);
-    const updateTweetRef = doc(db, "users", userActive.id);
     try {
-      const findTweet = userActive?.tweet?.find(
-        (li) =>
-          li.createdAt.nanoseconds === e.createdAt.nanoseconds &&
-          li.createdAt.seconds === e.createdAt.seconds
-      );
       await deleteDoc(doc(db, "tweet", e.id));
-      await updateDoc(updateTweetRef, {
-        tweet: arrayRemove(findTweet),
-      });
+      Notification("Tweet Deleted!");
     } catch (error) {
-      toast.error(error.message);
+      toast.error("Something went wrong,Try again!");
     }
   };
 
   ///change tweet type
   const HandleChangeTweetType = async (e) => {
     const updateTweetRef = doc(db, "tweet", getData.id);
-    const updateUserTweetRef = doc(db, "users", userActive.id);
-
-    const findTweet = userActive?.tweet?.find(
-      (li) =>
-        li.createdAt.nanoseconds === getData.createdAt.nanoseconds &&
-        li.createdAt.seconds === getData.createdAt.seconds
-    );
-
     try {
-      await updateDoc(updateUserTweetRef, {
-        tweet: arrayRemove(findTweet),
-      });
-
-      delete findTweet.tweetType;
-      findTweet.tweetType = e;
-
-      await updateDoc(updateUserTweetRef, {
-        tweet: arrayUnion(findTweet),
-      });
       await updateDoc(updateTweetRef, {
         tweetType: e,
       });
@@ -199,6 +171,68 @@ export const TweetContextProvider = ({ children }) => {
     }
   };
 
+  //Like Tweet
+  const likeTweet = async (e) => {
+    const updateTweetRef = doc(db, "tweet", e.id);
+    const validateFeedTweet = e?.like?.find((li) => li.id === userActive.uid);
+
+    const tempdata = {
+      likeUserName: userActive.name,
+      likeUserImage: userActive.photoURL,
+      createdAt: new Date(),
+      likeUserUniqueId: userActive.uniqueId,
+      id: userActive.uid,
+    };
+    e.like.push(tempdata);
+
+    try {
+      if (validateFeedTweet) {
+        await updateDoc(updateTweetRef, {
+          like: arrayRemove(validateFeedTweet),
+        });
+
+        return;
+      } else {
+        await updateDoc(updateTweetRef, {
+          like: arrayUnion(tempdata),
+        });
+      }
+    } catch (error) {
+      toast.error("Something went wrong,Try again!");
+    }
+  };
+
+  //Comment Tweet
+  const commentOnTweet = async () => {
+    const updateTweetRef = doc(db, "tweet", showComment.id);
+
+    const commentData = {
+      commentUser: userActive.name,
+      commentUserImage: userActive.photoURL,
+      commentUserUniqueId: userActive.uniqueId,
+      commentUserMessage: commentMessage,
+      commentReply: showComment.tweetUserUniqueId,
+      createdAt: new Date(),
+      commentUserId: userActive.uid,
+    };
+
+    try {
+      await updateDoc(updateTweetRef, {
+        comment: arrayUnion(commentData),
+      });
+      setShowComment("");
+      Notification("Comment Posted!");
+      setCommentMessage("");
+    } catch (error) {
+      toast.error("Something went wrong,Try again!");
+    }
+  };
+
+  //Retweet
+  const retweetTweet = async (e) => {
+    console.log(e);
+  };
+
   return (
     <TweetContext.Provider
       value={{
@@ -226,6 +260,13 @@ export const TweetContextProvider = ({ children }) => {
         setGetDta,
         pinPost,
         bookmarkTweet,
+        likeTweet,
+        commentMessage,
+        setCommentMessage,
+        commentOnTweet,
+        retweetTweet,
+        retweet,
+        setRetweet,
       }}
     >
       {children}

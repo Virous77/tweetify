@@ -9,12 +9,19 @@ import useFetchUser from "../../hooks/useFetchUser";
 import { useAction } from "../../store/actionContext";
 import { useTweet } from "../../store/tweetContext";
 import useFetchCollectionbyParam from "../../hooks/useFetchCollectionByParam";
+import useFetchCollection from "../../hooks/useFetchCollection";
 
 const Menubar = () => {
   const { getCurrentUser, activeUser, logout } = useAuthContext();
   const { data } = useFetchUser(activeUser?.uid, "users");
-  const { showLogout, setShowLogout, setUserActive, setGetBookMark } =
-    useAction();
+  const { data: tweetFeedData } = useFetchCollection("tweet");
+  const {
+    showLogout,
+    setShowLogout,
+    setUserActive,
+    setGetBookMark,
+    setTweetFeed,
+  } = useAction();
   const { setImage, setShowTweetType } = useTweet();
 
   const { data: bookMarkData } = useFetchCollectionbyParam(
@@ -28,6 +35,10 @@ const Menubar = () => {
     setUserActive(data[0]);
     setGetBookMark(bookMarkData);
   }, [data, bookMarkData]);
+
+  useEffect(() => {
+    setTweetFeed(tweetFeedData);
+  }, [tweetFeedData]);
 
   return (
     <aside className="menuBar">

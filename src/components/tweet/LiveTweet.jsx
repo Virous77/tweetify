@@ -1,24 +1,24 @@
 import React from "react";
 import Moment from "react-moment";
 import "moment-timezone";
-import useFetchCollection from "../../hooks/useFetchCollection";
 import LiveTweetAction from "./LiveTweetAction";
 import { BsThreeDots } from "react-icons/bs";
 import { useAction } from "../../store/actionContext";
 import LiveTweetActionBox from "./LiveTweetActionBox";
 import EditTweetType from "./EditTweetType";
+import RetweetMsg from "./RetweetMsg";
 
 const LiveTweet = () => {
-  const { data, loading } = useFetchCollection("tweet");
   const {
     setShowLiveActionBox,
     showLiveActionBox,
     setShareTweet,
     showChangeType,
     setShowChangeType,
+    tweetFeed,
+    setShowRetweetType,
+    showRetweetType,
   } = useAction();
-
-  if (loading) return <p>Loading..</p>;
 
   return (
     <section
@@ -27,12 +27,13 @@ const LiveTweet = () => {
         setShowLiveActionBox("");
         setShareTweet("");
         setShowChangeType("");
+        setShowRetweetType({ ...showRetweetType, retweetType: "" });
       }}
     >
       <div className="line"></div>
 
       <main className="liveTweetListBar">
-        {data?.map((post, idx) => (
+        {tweetFeed?.map((post, idx) => (
           <section key={post.id}>
             <div className="liveTweetList">
               <div className="liveUsrImg">
@@ -139,6 +140,8 @@ const LiveTweet = () => {
           </section>
         ))}
       </main>
+
+      {showRetweetType.retweetData && <RetweetMsg />}
     </section>
   );
 };

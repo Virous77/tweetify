@@ -16,9 +16,11 @@ import { Register, Login } from "./components/auth/index";
 import { useAction } from "./store/actionContext";
 import { LogoutFooter } from "./components/layout/index";
 import { useAuthContext } from "./store/authContext";
+import CommetTweet from "./components/tweet/CommetTweet";
 
 const App = () => {
-  const { showLogin, showRealLogin, showNotification } = useAction();
+  const { showLogin, showRealLogin, showNotification, showComment } =
+    useAction();
   const { user } = useAuthContext();
 
   return (
@@ -39,6 +41,7 @@ const App = () => {
       {showRealLogin && <Login />}
       {!user.isLoggedIn && <LogoutFooter />}
       {showNotification && <p className="notification">{showNotification}</p>}
+      {showComment && <CommetTweet />}
       <ToastContainer />
     </section>
   );

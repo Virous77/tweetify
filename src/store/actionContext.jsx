@@ -11,8 +11,6 @@ export const ActionContextProvider = ({ children }) => {
   //Profile State
   const [showLogout, setShowLogout] = useState(false);
   const [showFullImage, setShowFullImage] = useState("");
-  const [userActive, setUserActive] = useState("");
-  const [getBookmark, setGetBookMark] = useState([]);
 
   //LiveTweet
   const [showLiveActionBox, setShowLiveActionBox] = useState("");
@@ -20,9 +18,18 @@ export const ActionContextProvider = ({ children }) => {
   const [showAction, setShowAction] = useState({ showDelete: false });
   const [changeTweetType, setChangeTweetType] = useState("");
   const [showChangeType, setShowChangeType] = useState("");
+  const [showComment, setShowComment] = useState("");
+  const initialState = {
+    retweetType: "",
+    retweetData: "",
+  };
+  const [showRetweetType, setShowRetweetType] = useState(initialState);
 
   //Global State
   const [showNotification, setShowNotification] = useState("");
+  const [userActive, setUserActive] = useState("");
+  const [getBookmark, setGetBookMark] = useState([]);
+  const [tweetFeed, setTweetFeed] = useState([]);
 
   const Notification = (e) => {
     setShowNotification(e);
@@ -62,6 +69,13 @@ export const ActionContextProvider = ({ children }) => {
         setShowChangeType,
         getBookmark,
         setGetBookMark,
+        tweetFeed,
+        setTweetFeed,
+        showComment,
+        setShowComment,
+        showRetweetType,
+        setShowRetweetType,
+        initialState,
       }}
     >
       {children}
